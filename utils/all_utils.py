@@ -6,6 +6,14 @@ import os
 from matplotlib.colors import ListedColormap
 plt.style.use("fivethirtyeight")
 def prepare_data(df):
+  """Used to separate Dependent and independent Feature
+
+  Args:
+      df (pandas DataFrame): holds the data
+
+  Returns:
+     tuples of independent and dependent feature
+  """
   X = df.drop("y", axis=1)
 
   y = df["y"]
@@ -13,6 +21,12 @@ def prepare_data(df):
   return X, y
 
 def save_model(model, filename):
+  """This saves the trained model
+
+  Args:
+      model (python object): trained model to
+      filename (str): path to save trained model
+  """
   model_dir = "models"
   os.makedirs(model_dir, exist_ok=True) # ONLY CREATE IF MODEL_DIR DOESN"T EXISTS
   filePath = os.path.join(model_dir, filename) # model/filename
@@ -20,6 +34,13 @@ def save_model(model, filename):
 
 
 def save_plot(df, file_name, model):
+  """This saves the plot
+
+  Args:
+      df (pandas DataFrame): Pandas dataframe consisting our data
+      file_name (str): file name to save the plot
+      model (python object): trained model
+  """
   def _create_base_plot(df):
     df.plot(kind="scatter", x="x1", y="x2", c="y", s=100, cmap="winter")
     plt.axhline(y=0, color="black", linestyle="--", linewidth=1)
